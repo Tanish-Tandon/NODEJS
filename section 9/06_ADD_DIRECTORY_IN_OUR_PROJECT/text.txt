@@ -439,3 +439,231 @@ import karna csv mai thoda sahi nhi rheta hai thoda type bekar hojata hai
 
 
 
+
+
+mongoimport vs mongoexport
+
+human readable chaiyeh 
+
+
+mongodump vs mongorestore  
+database server sai lekar dusre par rakhna hai
+
+
+
+
+
+
+
+
+// authentication is enabled thik na
+
+
+mongod --port 27018 --dbpath /Users/tanishtandon/Desktop/new_db
+
+mongosh --port 27018
+ 
+
+mongod --port 27018 --dbpath /Users/tanishtandon/Desktop/new_db --auth
+
+
+
+db.createUser({
+  user: "admin",
+  pwd: "admin",
+  roles: [{ role: "root", db: "admin" }],
+});
+
+
+
+root role means admin ke sath kaam karskta hai aur manage kar skta hai
+
+
+// login in mongoshell
+db.auth("admin","admin")// username password
+
+
+db.getUsers()
+
+// system.users naam ka collection 
+
+db.system.users.find()//credentials bhi dikege
+
+
+
+admin
+
+
+db.system.users.find().  // yeh sirf system.users admin ke andar hota hai saara collections 
+
+
+
+
+
+
+
+hellow
+Yeh collection (table jaisa) hai
+Agar exist nahi karta → MongoDB automatically create kar dega
+
+
+
+db.runCommand({connectionStatus:1}).authInfo
+
+
+db.hellow.insertOne({name:"tanish"})
+shos
+
+db.createUser({
+  user: "anurag",
+  pwd: "anurag",
+  roles: [{ role: "readWrite", db: "storageApp" }]
+})
+
+
+
+
+
+
+
+
+
+
+
+
+1. MongoDB me “hello” command kya hota hai?
+
+MongoDB me ek built-in command hota hai:
+
+db.runCommand({ hello: 1 })
+
+👉 Yeh server se status info deta hai
+
+🧠 Output me kya milta hai?
+server running hai ya nahi
+primary/secondary (replica set me)
+connection info
+
+👉 Basically:
+“Server alive hai ya nahi?” check karta hai
+
+
+
+
+
+
+
+
+
+
+
+db.hellow.find()
+
+
+
+db.hellow.drop()
+
+
+
+
+
+
+db.createUser({
+  user: "anurag",
+  pwd: "tanishh",
+  roles: [{ role: "read", db: "storageApp" }]
+})
+
+
+
+
+
+
+
+
+db.createUser({
+  user: "anurag",
+  pwd: "tanishh"})
+
+
+  db.auth({
+  user: "anurag",
+  pwd: "tanishh"})
+
+  // stroage app filal sirf read kar skta hai
+  kyoki read access hai only
+
+
+
+mongosh --port 27018 -u anurag -p tanishh --authenticationDatabase "admin"
+
+
+
+
+
+
+
+
+
+
+
+  admin> db.runCommand({connectionStatus:1}).authInfo
+{
+  authenticatedUsers: [ { user: 'anurag', db: 'admin' } ],
+  authenticatedUserRoles: [ { role: 'read', db: 'storageApp' } ]
+}
+admin> 
+
+
+
+
+
+mongosh mongodb://anurag:tanishh@localhost:27018/storageApp?authSource=admin
+
+// authSource=admin uss user ko authenticate karna hai
+// 
+
+
+
+
+
+mongosh mongodb://anurag:tanishh@localhost:27018/admin
+
+
+
+
+
+
+
+mongosh -u "username" -p "password" --authenticationDatabase "admin"
+
+
+
+
+
+
+mongosh mongodb://admin:admin@localhost:27018/admin
+
+
+
+db.updateUser("anurag",{roles:[{role:"dbAdmin",db:"storageApp"}]});
+
+
+
+db.hi.insertOne({name:"HII"})
+
+
+
+
+
+db.updateUser("anurag",{roles:[{role:"readWrite",db:"test"}]});
+
+
+
+db.updateUser("anurag",{roles:[{role:"dbAdmin",db:"storageApp"},
+{role:"readWrite",db:"test"},],});
+
+
+
+db.updateUser("anurag",{roles:[{role:"readWrite",db:"storageApp"},{role:"dbAdmin",db:"storageApp"},
+{role:"readWrite",db:"test"},],});

@@ -46,12 +46,18 @@ router.post('/register',async(req,res,next)=>{
 
 
 
+    // access control means koi user nhi hai 
+
+
+    
 
 
 
 
 
 
+
+    //  mongosh --port 27018
 
 
 
