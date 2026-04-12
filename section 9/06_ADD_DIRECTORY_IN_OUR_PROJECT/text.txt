@@ -805,3 +805,8 @@ db.createUser({user:"anurag",pwd:"anurag12",roles:[{role:"dbAdmin",db:"storageAp
 
 
 
+
+var cfg=res.conf();
+...cfg.members[0].host="mongodb://13.235.50.113:27017";
+...rs.reconfig(cfg, {force:true});
+

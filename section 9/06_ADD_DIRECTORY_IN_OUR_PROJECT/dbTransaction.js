@@ -225,3 +225,23 @@
 // // Fault Tolerance is the ability of a system to continue working properly even if one or more components fail.
 
 
+
+// mongodb://anurag:anurag12@ec2-13-235-50-113.ap-south-1.compute.amazonaws.com:27017/storageApp
+
+import { MongoClient } from "mongodb";
+
+const connectionURL = "mongodb://anurag:anurag12@13.235.50.113:27017/storageApp";
+
+const client = new MongoClient(connectionURL);
+
+await client.connect();
+
+const db = client.db();
+
+const users = db.collection("users");
+
+// data fetch karo
+const result = await users.find().toArray();
+console.log(result);
+
+await client.close();
