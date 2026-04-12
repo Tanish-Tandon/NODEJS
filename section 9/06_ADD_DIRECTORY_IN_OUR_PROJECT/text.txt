@@ -796,7 +796,7 @@ db.createUser({user:'admin',pwd:'admin',roles:[{role:'root',db:'admin'}]})
 
 
 
-
+mongodb://anurag:anurag12@localhost:27017/storageApp?authSource=storageApp&replicaSet=myReplicaSet
 
 
 db.createUser({user:"anurag",pwd:"anurag12",roles:[{role:"dbAdmin",db:"storageApp"},{role:'readWrite',db:'storageApp'}]})
