@@ -557,7 +557,9 @@ connection info
 
 
 
+
 db.hellow.find()
+
 
 
 
@@ -667,3 +669,139 @@ db.updateUser("anurag",{roles:[{role:"dbAdmin",db:"storageApp"},
 
 db.updateUser("anurag",{roles:[{role:"readWrite",db:"storageApp"},{role:"dbAdmin",db:"storageApp"},
 {role:"readWrite",db:"test"},],});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+brew services stop mongodb-community
+
+nano /opt/homebrew/etc/mongod.conf
+
+replication:
+  replSetName: "myReplicaSet"
+
+  CTRL + O → Enter
+CTRL + X
+
+brew services start mongodb-community
+
+mongosh
+
+rs.initiate()
+
+rs.status()
+
+
+
+
+🔥 Tere case me use (IMPORTANT)
+
+👉 Tu use kar raha hai MongoDB ke liye:
+
+openssl rand -base64 756 > keyfile
+
+👉 Yeh kya karega:
+✔️ ek strong secret generate karega
+✔️ usko file me save karega
+✔️ MongoDB nodes isi se authenticate karte hain
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Screenshot 2025-11-16 at 10.18.40 PM.png	usersArray.json
+(base) tanishtandon@Tanishs-MacBook-Air Desktop % chmod 400 keyfile
+(base) tanishtandon@Tanishs-MacBook-Air Desktop % chown $(whoami) keyfile
+(base) tanishtandon@Tanishs-MacBook-Air Desktop % ls -l keyfile
+-r--------@ 1 tanishtandon  staff  1024 12 Apr 10:33 keyfile
+(base) tanishtandon@Tanishs-MacBook-Air Desktop % mv keyfile /opt/homebrew/var/mongodb/
+(base) tanishtandon@Tanishs-MacBook-Air Desktop % ls /opt/homebrew/var/mongodb/
+_mdb_catalog.wt
+_tmp
+collection-03
+
+
+
+chmod 400 keyfile
+
+
+
+
+🔐 chmod 400 mongo-keyfile kya karta hai?
+
+👉 chmod = change mode (permissions change karna)
+
+👉 400 = permission code
+
+
+
+
+📊 Breakdown of 400
+
+Unix permissions 3 parts me hoti hain:
+
+Owner | Group | Others
+
+400 ka matlab:
+
+Part	Value	Meaning
+Owner	4	Read only 📖
+Group	0	No access ❌
+Others	0	No access ❌
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+db.createUser({user:'admin',pwd:'admin',roles:[{role:'root',db:'admin'}]})
+
+
+
+
+
+
+
+
+
+db.createUser({user:"anurag",pwd:"anurag12",roles:[{role:"dbAdmin",db:"storageApp"},{role:'readWrite',db:'storageApp'}]})
+
+
+
+
+

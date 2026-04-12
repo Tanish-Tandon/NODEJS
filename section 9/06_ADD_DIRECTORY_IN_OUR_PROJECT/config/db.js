@@ -1,11 +1,13 @@
 import { MongoClient } from "mongodb";
 
 
-export const client = new MongoClient(
-  "mongodb://anurag:tanishh@localhost:27018/storageApp?authSource=admin"
-);
+// export const client = new MongoClient(
+//   "mongodb://anurag:tanishh@localhost:27017/storageApp?authSource=admin"
+// );
 
 // export const client=new MongoClient("mongodb://localhost:27017/storageApp")
+
+export const client=new MongoClient("mongodb://anurag:anurag12@localhost:27017/storageApp")
 
 
 
