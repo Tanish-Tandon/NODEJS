@@ -1,0 +1,326 @@
+Mongoose (ODM) =
+"Ek tool jo JS objects ko MongoDB me safely store karne aur wapas lane me help karta hai"
+
+
+
+
+
+Mongoose ek library hai (tool) jo hum Node.js + MongoDB ke saath use karte hain.
+
+Structure define karta hai (Schema)
+Database se baat karta hai (Model)
+Validation deta hai (galat data rokta hai)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import mongoose from "mongoose";
+
+
+await mongoose.connect("mongodb://admin:admin@localhost")
+
+
+
+// const pluralizer=mongoose.pluralize();// default pluralizer
+// console.log(pluralizer("person"));// people
+ 
+
+
+
+
+mongoose.pluralize((word)=>word.toLocaleLowerCase() + "_collection");// to avoid capitalized collection names
+
+
+mongoose.model("Cat",{},"dogs")
+
+
+// collection = model in mongoose
+// mongoose automatically creates collection in plural form of model name ex: user => users
+
+// collection banana 
+// mongoose.model("user",{})
+
+
+console.log("DATABASE CONNECTED");
+
+
+
+
+
+
+
+mongoose.model("Cat",{},"dogs")// if collection name is not provided then it will pluralize the model name and use that as collection name aur isme third arguemnet se hum collection name specify kar sakte hai
+
+
+
+
+
+
+mongoose.model("User",{});
+
+User hamare model ka naam hai uske corresponding collection banega users in mongodb
+
+
+
+
+mongoose.set("autoCreate",false);  // automatically koi bhi create nhi hogha jabh takh kuchi insert na kare yaa false ki jagah true na kare
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+🔹 Line samjho:
+mongoose.model("Customer", {});
+
+👉 Yeh function Mongoose ka hai
+
+🧠 Step-by-step breakdown
+👉 mongoose.model("Customer", {})
+
+Isme 2 cheeze hoti hain:
+
+"Customer" → Model ka naam
+{} → Schema (structure)
+⚠️ Problem in your code
+mongoose.model("Customer", {});
+
+👉 {} empty hai → koi structure define nahi kiya
+👉 Iska matlab: kuch bhi data insert ho sakta hai (not recommended ❌)
+
+✅ Correct version
+const customerSchema = new mongoose.Schema({
+  name: String,
+  age: Number
+});
+
+const Customer = mongoose.model("Customer", customerSchema);
+🔥 Ab main concept samjho
+🧩 Model kya hota hai?
+
+👉 Model = ek JavaScript object (class jaisa) jo database se interact karta hai
+
+Simple:
+
+insert
+delete
+update
+find
+
+sab model se hota hai
+
+📦 Example
+const user = new Customer({
+  name: "Tanish",
+  age: 20
+});
+
+await user.save();
+
+👉 yeh model ke through data DB me gaya
+
+🗄️ Collection kya hota hai?
+
+👉 Collection = MongoDB me data store hone ki jagah
+
+👉 SQL me:
+
+Table = Collection
+⚡ Model vs Collection (MOST IMPORTANT)
+Model	Collection
+JS side pe hota hai	Database side pe hota hai
+Code me use hota hai	MongoDB me actual data store hota hai
+Capital (Customer)	lowercase plural (customers)
+🔥 Magic cheez (Important)
+const Customer = mongoose.model("Customer", schema);
+
+👉 Automatically MongoDB me collection banega:
+
+➡️ "customers" (plural + lowercase)
+
+🧠 Flow samjho (visual)
+Customer (Model)  --->  customers (Collection)
+   JS code             MongoDB database
+🎯 Ekdum simple line me
+
+👉 Model = JS ka handle (remote control)
+👉 Collection = actual data store hone ki jagah
+
+🚀 Real-world analogy
+Model = Swiggy app 🍔
+Collection = Restaurant kitchen 🍳
+
+👉 Tum app se order karte ho → kitchen me food banta hai
+
+💥 Final recap
+mongoose.model() → model banata hai
+Model → database se baat karta hai
+Collection → data store karta hai
+
+
+
+
+
+
+
+
+
+
+const UserModel=mongoose.model("Customer",{});
+
+yeh ek constructor return karta hai
+
+
+
+
+
+mongoose.model() ek constructor function (class jaisa) return karta hai
+
+
+
+
+UserModel = class
+new UserModel() = object (document instance)
+
+
+
+
+
+
+
+
+
+
+🔹 Step 1: Simple idea
+Mongoose me __v ek counter (ginti) hai.
+{ name: "Tanish", __v: 0 }
+👉 matlab: ye data abhi 0 baar update hua hai
+
+🔹 Step 2: Update hone par kya hota hai?
+// pehle{ name: "Tanish", __v: 0 }// update kiya{ name: "Tanish Kumar", __v: 1 }
+👉 har update ke baad __v + 1
+
+🔹 Step 3: Real life example (IMPORTANT 🔥)
+Socho Google Docs jaisa system:
+
+
+Tum aur tumhara friend same file open karte ho
+
+
+Situation:
+
+
+Tum dono ne same data dekha:
+
+
+{ name: "Tanish", __v: 0 }
+
+
+Tumne update kiya:
+
+
+{ name: "Tanish A", __v: 1 }
+
+
+Tumhara friend (old version ke sath) update karta hai
+
+
+
+🔴 Problem kya hai?
+Friend ke paas old data hai (__v = 0)
+👉 DB me latest hai (__v = 1)
+
+🔥 Yahan __v ka kaam aata hai
+Mongoose check karta hai:
+Tum update kar rahe ho version 0 seBut DB me already version 1 hai
+👉 ❌ Update reject
+
+🔹 Simple line me samajh:
+
+__v = "tum jis data ko update kar rahe ho wo latest hai ya purana?"
+
+
+🔹 Agar __v nahi hota 😵
+
+
+Friend ka update tumhara data overwrite kar deta
+
+
+Tumhara change lost ho jata
+
+
+👉 data loss 💥
+
+🔹 Ek aur easy analogy 🧠
+Socho:
+
+
+Tumhare paas notebook ka page 1 hai
+
+
+Friend ke paas bhi same page 1
+
+
+Tumne page ko update karke page 2 bana diya
+👉 Friend abhi bhi page 1 se likh raha hai
+__v bolega:
+
+"Bhai tu purane page pe likh raha hai ❌"
+
+
+🔹 Final ek line:
+👉 __v = safety guard hai jo galat overwrite hone se bachata hai
+
+Agar ab thoda samajh aa gaya ho toh bolo 👍
+Main next step me tumhe code me exactly kaise check hota hai (real API) bhi dikhaunga 🔥
+
+
+
+
+
+❌ Pessimistic Concurrency
+pehle hi lock laga dete hain
+dusra banda edit nahi kar sakta
+✅ Optimistic Concurrency
+koi lock nahi
+last me check
+
+
