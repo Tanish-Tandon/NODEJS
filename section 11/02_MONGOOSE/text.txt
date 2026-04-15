@@ -324,3 +324,19 @@ koi lock nahi
 last me check
 
 
+
+
+
+
+
+// Mongoose me:
+
+// Query buffering = jab DB connect nahi hota, tab queries ko temporarily store (buffer) kar lena
+
+// 🔥 Simple idea
+
+// 👉 Tumne query likhi
+// 👉 DB abhi connect nahi hua
+// 👉 Mongoose bolta hai:
+
+// “Main is query ko hold karke rakhta hoon, connection aate hi run kar dunga”
