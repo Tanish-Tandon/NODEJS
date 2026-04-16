@@ -5,9 +5,9 @@
 
 
 
-import mongoose ,{Schema, SchemaTypes} from "mongoose";
+import {model, Schema, SchemaTypes} from "mongoose";
 
-console.log("START USERMODEL.JS FILE");
+
 
 // const userSchema={name:String,age:Number}
 
@@ -71,14 +71,7 @@ const userSchema=new Schema({
 
 
 
-const UserModel=mongoose.model("User",userSchema);
+const User=model("User",userSchema);
 
 
-
-const data= await UserModel.insertOne({name:"THE RIT TANDON",age:21,email:"tandon123@gmail.com",hobby:["coding"],parentId:"69dfa0ce536ed0638fbc9ab6"});
-
-
-console.log(data);
-
-
-console.log("USERMODEL.JS FILE EXECUTED");
+export default User;

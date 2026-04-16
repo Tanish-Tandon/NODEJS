@@ -566,3 +566,185 @@ Time Series	multiple data points over time
     // versionKey:'__version', //false
 
     // collection:"test"//niche User likha hai lekin collection name test ho jayega
+
+
+
+
+
+
+
+
+
+
+// crud ka create operation 
+// insertOne() method is used to insert a single document into the collection and it returns a promise that resolves to the inserted document. and create method is used to create a new document in the collection and it also returns a promise that resolves to the created document.
+
+
+
+
+
+// create method is flexible work like a insertOne and also insertmany
+
+
+
+
+
+
+Thenable ka main kaam hai: "Promise jaisa behavior dena without actually being a Promise"
+
+
+// yeh findOne() method hai jo ki ek document ko return karta hai jo ki query ke criteria se match karta hai. Agar multiple documents match karte hain, toh yeh method pehla document return karega. Agar koi document match nahi karta, toh yeh null return karega.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Thenable object = koi bhi object jisme .then() method hota hai
+
+Matlab agar kisi object par tum yeh likh sakte ho:
+
+obj.then(...)
+
+👉 Toh wo thenable hai
+
+🔹 Simple example (khud bana hua thenable)
+const obj = {
+  then: function(resolve, reject) {
+    resolve("Hello bhai");
+  }
+};
+
+obj.then((data) => {
+  console.log(data); // Hello bhai
+});
+
+👉 Yeh Promise nahi hai ❌
+
+
+Thenable is any object that implements a .then() method and can be used like a Promise.
+
+
+
+
+Ye actual Promise nahi hota, ye hota hai:
+
+👉 Mongoose Query Object (thenable)
+
+Matlab:
+Isme .then() hota hai ✅
+Isko await kar sakte ho ✅
+Lekin ye internally lazily execute hota hai ⚡
+
+
+
+
+Ye simple language mein:
+
+Jo object tum find() ya findOne() mein pass karte ho — wahi root filter query hai
+
+Example:
+UserModel.findOne({ age: 20 });
+
+👉 { age: 20 } = root filter query
+
+
+
+
+
+
+
+
+
+
+
+User.findOne() returns a thenable query object, and await resolves it into the actual document.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const user=await User.findOne({"email":"ta23@gmail.com"
+}).lean();
+
+
+console.log(user);
+
+
+
+
+
+
+
+
+
+.lean() lagane ke baad:
+
+const user = await User.findOne(...).lean();
+
+👉 Output:
+
+Plain JavaScript object (simple JSON)
+❌ .save() nahi
+❌ koi Mongoose magic nahi
+✅ fast performance
+
+.lean() makes Mongoose return a plain JavaScript object instead of a full document, improving performance.
+
+
+
+
+
+flattenMaps ka matlab:
+
+Map → normal object bana do
+
+
+
+
+
+const user=await User.findOne({"email":"ta23@gmail.com"
+});
+
+
+user ek document hai jo ki mongoose database sai communicate karta hai
+
+
+
+
+const user=await User.findOneAndUpdate({name:"THE RIT TANDON"},{age:2},{new:true});
+
+
+//findOneAndUpdate yeh wala validation pass kardeta hai kuch bhi restrictions ho koi fark nhi padhta isko
+
+
+
+const user=await User.findOneAndUpdate({name:"THE RIT TANDON"},{age:2},{new:true,runValidators:true});
+
+
+runValidators lagate hi yeh validation pass nhi karpaega
+
+
+
+
+const user=await User.findOne({"email":"ta23@gmail.com"
+})
+yeh validation pass nhi karega tumhara
