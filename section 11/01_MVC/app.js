@@ -6,19 +6,19 @@
 
 
 
-
+import {connectDB} from "./db.js";
 
 
 import express from "express";
 
 import todoRoutes from "./routes/todoRoutes.js";
 
-import {connectDB} from "./db.js";
+
 import { createEngine } from "express-react-views";
 
 const app=express();
 
-const db=await connectDB();
+// const db=await connectDB();
 
 app.use(express.json());
 
@@ -41,10 +41,10 @@ app.engine('jsx',createEngine);
 
 
 
-app.use((req,res,next)=>{
-  req.db=db;
-  next();
-});
+// app.use((req,res,next)=>{
+//   req.db=db;
+//   next();
+// });
 
 
 app.get("/", (req, res) => {
@@ -56,6 +56,18 @@ app.use("/todos",todoRoutes);
 
 
 
-app.listen(7200,()=>{
-  console.log(`Server is running`);
-})
+// app.listen(7200,()=>{
+//   console.log(`Server is running`);
+// })
+
+
+
+const startServer = async () => {
+  await connectDB();   // ✅ yahi missing tha
+
+  app.listen(7200, () => {
+    console.log("🚀 Server is running");
+  });
+};
+
+startServer();

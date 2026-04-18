@@ -17,29 +17,55 @@
 
 
 
-import { MongoClient } from "mongodb";
+// import { MongoClient } from "mongodb";
 
-export const client=new MongoClient("mongodb://admin:admin@localhost:27017/todoApps?authSource=admin");
+import mongoose from "mongoose";
+
+
+
+
+
+// export const client=new MongoClient("mongodb://admin:admin@localhost:27017/todoApps?authSource=admin");
 
 
 export async function connectDB() {
-  await client.connect();
 
-  const db=client.db();
+  try{
+      await mongoose.connect(
+    "mongodb://admin:admin@localhost:27017/todoApps?authSource=admin"
+
+
+  );
+
+  
 
   console.log("Database connected");
+  }
+  catch(err){
+    console.log(err.message);
+    process.exit(1);// iska means kisi error ki vajah sai exit ho rha hai code hamara
+  }
 
-  return db;
+
+
   
 }
 
 
 
-process.on("SIGINT",async()=>{
-  await client.close();
 
+
+// await connectDB();
+
+
+
+
+process.on("SIGINT",async()=>{
+  // await client.close();
+
+  await mongoose.disconnect();
   console.log("Client Disconnected!");
 
-  process.exit(0);
+  process.exit(0);// iska matlab hai ki hum gracefully exit kara rhe hai
 })
 
