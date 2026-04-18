@@ -748,3 +748,44 @@ runValidators lagate hi yeh validation pass nhi karpaega
 const user=await User.findOne({"email":"ta23@gmail.com"
 })
 yeh validation pass nhi karega tumhara
+
+
+
+
+
+
+
+
+
+
+
+
+Mongoose queries ka matlab hai:
+👉 MongoDB se data fetch / update / delete karne ke liye jo methods Mongoose provide karta hai, unhe queries bolte hain.
+
+Simple line (interview ready):
+
+Mongoose queries are methods used to interact with MongoDB collections through Mongoose models.
+
+
+
+
+
+
+
+
+
+
+User.find({}).exec().then(console.log);
+
+👉 Promise style
+
+⚡ 6. Chain queries + exec
+User.find({ age: { $gt: 18 } })
+    .select("name email")
+    .sort({ age: -1 })
+    .limit(5)
+    .exec()
+    .then(console.log);
+
+👉 .exec() end me lagta hai

@@ -3,7 +3,7 @@ import "./db.js";
 
 import "./UserModel.js";
 
-import "./crud.js"; 
+import "./query.js"; 
 
 
 console.log("APP.JS FILE EXECUTED");
