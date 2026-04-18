@@ -27,6 +27,17 @@ const userSchema=new Schema({
         type:Number,
         required:[true,"Age is required Please provide age"],
         min:[18,"Age must be at least 18"],
+        validate:{
+            validator(){
+                console.log("RUNNING CUSTOM VALIDATION");
+
+               return this.age % 2 === 0;
+          
+            },
+
+            message:"AGE CAN ONLY BE AN EVEN NUMBER."
+
+        }
     },
 
      email:{

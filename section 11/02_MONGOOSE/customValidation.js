@@ -231,7 +231,25 @@ import mongoose from "mongoose";
 
 
 
-const user=await User.findById("69e0048ab058ab6b1ea610c4");
+// const user=await User.findById("69e0048ab058ab6b1ea610c4");
+
+// const json=user.toJSON();
+
+
+
+
+
+
+const user=await User.create({
+    name:"TANISH THE KING OF ALL TIME",
+    age:82,
+    email:"tano123@gmail.com",
+})
+
+
+
+console.log(user);
+// console.log(json);
 
 
 

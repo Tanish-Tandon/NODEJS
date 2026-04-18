@@ -3,7 +3,7 @@ import "./db.js";
 
 import "./UserModel.js";
 
-import "./document.js"; 
+import "./customValidation.js"
 
 
 console.log("APP.JS FILE EXECUTED");
