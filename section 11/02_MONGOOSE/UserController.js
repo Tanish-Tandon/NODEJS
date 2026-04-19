@@ -224,8 +224,10 @@
 
 
 
-import  User from "./UserModel.js";
-import mongoose from "mongoose";
+// import  User from "./UserModel.js";
+// import mongoose from "mongoose";
+
+
 
 
 
@@ -240,15 +242,15 @@ import mongoose from "mongoose";
 
 
 
-const user=await User.create({
-    name:"TANISH THE KING OF ALL TIME",
-    age:82,
-    email:"tano123@gmail.com",
-})
+// const user=await User.create({
+//     name:"TANISH THE KING OF ALL TIME",
+//     age:82,
+//     email:"tano123@gmail.com",
+// })
 
 
 
-console.log(user);
+// console.log(user);
 // console.log(json);
 
 
@@ -274,3 +276,39 @@ console.log(user);
 
 
 // console.log(user.isModified());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import  User from "./UserModel.js";
+import mongoose from "mongoose";
+
+
+
+const user=await User.findOne({email :
+"tandon1234@gmail.com"}).populate({
+    path:"parentId",
+    select:'name age -_id',
+
+});
+
+console.log(user);
+
+
+
+
+
+
+

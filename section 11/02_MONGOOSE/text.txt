@@ -789,3 +789,37 @@ User.find({ age: { $gt: 18 } })
     .then(console.log);
 
 👉 .exec() end me lagta hai
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. What is ref?
+
+ref is used inside a schema to tell Mongoose:
+
+“This field stores the ID of a document from another collection.”
+
+
+
+
+
+populate() is used to:
+
+Replace ObjectId with actual document data
+
+

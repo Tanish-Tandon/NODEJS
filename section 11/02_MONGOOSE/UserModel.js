@@ -54,7 +54,8 @@ const userSchema=new Schema({
         required:function(){
             return this.age < 22;
         },
-        default:null
+        default:null,
+        ref:'User',
     }
 },
 
@@ -86,3 +87,5 @@ const User=model("User",userSchema);
 
 
 export default User;
+
+
