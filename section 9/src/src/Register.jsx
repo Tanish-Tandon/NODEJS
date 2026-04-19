@@ -61,6 +61,8 @@ const Register = () => {
         setServerError(data.error);
       } else {
         // Registration success
+      
+  
        setIsSuccess(true);
         setTimeout(() => {
           // navigate("/login");
