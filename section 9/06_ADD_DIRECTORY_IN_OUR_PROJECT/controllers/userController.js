@@ -3,7 +3,10 @@
 import { ObjectId } from "mongodb";
 
 
-import {client} from "../config/db.js"
+
+import User from "../models/userModel.js";
+import mongoose, { Types } from "mongoose";
+import Directory from "../models/directoryModel.js"
 
 
 
@@ -22,10 +25,10 @@ import {client} from "../config/db.js"
 export const register=async(req,res,next)=>{
     const {name,email,password}=req.body
 
-    // const db=req.db;
-    const db=req.db;
+   
 
-    const foundUser=await db.collection('users').findOne({email});
+
+    const foundUser=await User.findOne({email}).lean();
 
 
     if(foundUser){
@@ -53,30 +56,32 @@ export const register=async(req,res,next)=>{
 
 
 
-    //  mongosh --port 27018
-
-
-
-// const session=client.startSession();
 
 
 
 
+const session=await mongoose.startSession();
 
 
-//   const dirCollection=db.collection("directories");
+
+
+
+
+
     try{
 
       
-        const rootDirId=new ObjectId()
-        // const userId=new ObjectId()
-        const userId=new ObjectId();
+        const rootDirId=new Types.ObjectId();
+   
+        const userId=new Types.ObjectId();
 
 
 
 
-        //   const dirCollection=db.collection("directories");
-        const dirCollection=db.collection("directories");
+
+
+
+
 
 
 
@@ -101,15 +106,15 @@ export const register=async(req,res,next)=>{
 
 
 
-// session.startTransaction();
+session.startTransaction();
 
 
-await dirCollection.insertOne({
+await Directory.insertOne({
    
-    // id:dirId,
+
     _id:rootDirId,
     name:`root-${email}`,
-    // userId,
+
 
 
 
@@ -121,23 +126,23 @@ await dirCollection.insertOne({
 
  
     
-});
-
-// const rootDirId=userRootDir.insertId;
-// const rootDirId = userRootDir.insertedId;
-// console.log(rootDirId);
+},
+{session}
+);
 
 
 
 
 
-   await db.collection("users").insertOne({
+
+   await User.insertOne({
         _id:userId,
         name,
         email,
         password,
         rootDirId,
-    }
+    },
+    {session}
 
 
     )
@@ -153,7 +158,7 @@ await dirCollection.insertOne({
 
 
 
-    // session.commitTransaction(); 
+    session.commitTransaction(); 
 
 
 
@@ -166,23 +171,21 @@ await dirCollection.insertOne({
     // commit transaction
 
 
-    // const userId=createdUser.insertedId;
-    // await db.collection("directories").updateOne({_id:rootDirId},
-    //     {$set:{userId}}
-    // )
+   
 
 
 
 
-
-            // res.status(201).json({message:"User registered"})
+          
             res.status(201).json({message:"User registered"});
 
 
     }
     catch(err){
         
-        // session.abortTransaction();
+        console.log(err);
+        console.log(req.body);
+  
         if(err.code===121){
             res.status(400).json({error:"Invalid fields,please enter valid details"});
         }else{
@@ -220,25 +223,23 @@ await dirCollection.insertOne({
 
 
 export const login=async(req,res,next)=>{
-    // console.log(req.body);
+    
  
     const {email,password}=req.body;
 
-    const db=req.db
+
 
   
 
 
-    const user=await db.collection('users').findOne({email});
+    const user=await User.findOne({email});
 
-    // console.log(user);
+   
 
     
     console.log(user);
 
-    // if(!user || user.password !== password){
-    //     return res.status(401).json({error : "INVALID CREDENTIALS"});
-    // }
+   
   
 
     if(!user || user.password!==password){
@@ -258,7 +259,7 @@ export const login=async(req,res,next)=>{
 
 
 
-    // res.json({message : 'LOGGED IN'})
+   
 
     res.json({message: 'LOGGED IN'});
 }
