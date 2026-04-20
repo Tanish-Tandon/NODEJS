@@ -1,0 +1,32 @@
+Virtuals are fake fields on Mongoose documents that are computed from real data and are not stored in MongoDB.
+
+Agar chaho to main tumhe virtual vs methods vs statics bhi compare karke samjha deta hoon.
+
+Mongoose me virtuals aisi properties hoti hain jo MongoDB me store nahi hoti, but document ke saath calculated field ki tarah kaam karti hain.
+
+
+
+import mongoose from "mongoose";
+
+const userSchema = new mongoose.Schema({
+  firstName: String,
+  lastName: String
+});
+
+userSchema.virtual("fullName").get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
+
+const User = mongoose.model("User", userSchema);
+
+
+
+const user = new User({
+  firstName: "Tanish",
+  lastName: "Tandon"
+});
+
+console.log(user.fullName);
+
+
+Tanish Tandon
