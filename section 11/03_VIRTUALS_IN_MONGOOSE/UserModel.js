@@ -6,6 +6,7 @@
 
 
 import {model, Schema, SchemaTypes} from "mongoose";
+import { use } from "react";
 
 
 
@@ -117,13 +118,25 @@ const userSchema=new Schema({
 
 
 
-    toJSON:{
-        virtuals:true,
-    },
 
-    toObject:{
-        virtuals:true,
+    methods:{
+    getSummary(option){
+
+        if(option === 'full'){
+
+
+            return `${this.name} is ${this.age} years old and he has these hobbies:${this.hobby.join(',  ')}.`;
+
+        }
+
+        return `${this.name} is ${this.age} years old.`;
+
     }
+    }
+
+
+
+    
 
 
 
@@ -155,6 +168,10 @@ userSchema.virtual('emailDomain').get(function(){
 })
 
 
+
+// userSchema.methods.abc=function(){
+
+// }
 
 
 const User=model("User",userSchema);

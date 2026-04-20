@@ -1,23 +1,3 @@
-// import mongoose from "mongoose";
-// import User from "./UserModel.js";
-
-// const user = await User.findOne({ email: "ramesh@gmail.com" });
-
-// user.hobbiesString = "TT, Football";
-
-// console.log(user.hobbiesString);
-// console.log(user.emailDomain);
-
-// // await user.save();
-// // console.log(user.hobbiesString);
-// // console.log(user.isAdult);
-
-// // console.log(user);
-// // console.log(user.schema.virtuals);
-// // console.log(User.schema.virtuals);
-// console.log(user.toJSON());
-
-// await mongoose.disconnect();
 
 
 
@@ -83,15 +63,35 @@ const user=await User.findOne({email:"tand3@gmail.com"})
 
 // below dono virtual property include karke dega
 
-console.log(user.toObject());
+// console.log(user.toObject());
 
-console.log(user.toJSON());// jo extra property hoghi vo nhi dikegi isme 
-
-
+// console.log(user.toJSON());// jo extra property hoghi vo nhi dikegi isme 
 
 
 
 
+
+// user.hobbiesString="TT,Football";
+
+// console.log(user.hobbiesString);
+// console.log(user.emailDomain);
+
+
+
+
+
+
+
+
+
+
+
+// console.log(user.getSummary());
+
+
+
+
+console.log(user.getSummary('full'));
 
 
 
