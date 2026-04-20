@@ -1,28 +1,49 @@
-import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
 
 
-// export const client = new MongoClient(
-//   "mongodb://anurag:tanishh@localhost:27017/storageApp?authSource=admin"
-// );
-
-// export const client=new MongoClient("mongodb://localhost:27017/storageApp")
-
-export const client=new MongoClient("mongodb://anurag:anurag12@localhost:27017/storageApp")
+export async function  connectDB() {
+  
+    try{
 
 
 
-export async function connectDB() {
-    await client.connect();
-    const db=client.db();
-    console.log('database connected');
-   return db;
+
+            await mongoose.connect("mongodb://anurag:anurag12@localhost:27017/storageApp");
+
+
+            
+//           await mongoose.connect(
+
+        
+
+
+// await mongoose.connect("mongodb://anurag:anurag12@localhost:27017/storageApp")
+
+
+
+
+
+
+   
+    console.log("DATABASE CONNECTED");
+    }catch(err){
+        console.log(err);
+        console.log("COULD NOT CONNECT TO THE DATABASE")
+        process.exit(1);
+    }
+
     
 }
+
+
+
+
+
 
 // yeh ek event hota hai jabh cltrl+c sai apna application cut karte hai
 process.on('SIGINT',async()=>{
     await client.close();
-    console.log("CLIENT DISCONNECTED")
+    console.log("DATABASE DISCONNECTED")
     process.exit(0);
     
 })
