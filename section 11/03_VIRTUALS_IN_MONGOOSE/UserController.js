@@ -128,15 +128,27 @@ import User from "./UserModel.js";
 
 
 
-const user=new User({
-    name:'brazil',
-    age:48,
-    email:"brazil12@gmail.com",
+// const user=new User({
+//     name:'brazil',
+//     age:48,
+//     email:"brazil12@gmail.com",
     
-});
+// });
 
 
-await user.save();
+// const user=await User.find({name:"brazil"});
+
+
+const user=await User.findOne({name:"brazil"});
+
+const user1=await User.find({name:"brazil"});
+
+// console.log(user);
+// console.log(user1);
+
+// const user=User.find({name:"TANISH THE KING OF ALL TIME"}); isme find find karke logic badha skte hai aur
+
+// await user.save();
 
 
 await mongoose.disconnect();

@@ -202,23 +202,55 @@ const userSchema=new Schema({
 
 
 
+//find idhar toh findOne bhi udhar 
 
-userSchema.pre('save',function(){
-    // console.log("RUN MY DOCUMENT MIDDLEWARE");
 
-    this.password=this.name + this.age;
-    // console.log(this);
-    // next();// likho na likho isme chal jaega 
+
+
+// userSchema.pre(["find","findOne"],function(){
+//     this.find({age:{$gte:90}}).select('name age -_id')
+// })
+
+// userSchema.pre("findOne",function(){
+//     this.find({age:{$gte:90}}).select('name age -_id')
+// })
+
+
+
+///^find/". jitne bhi find wale hai un sbke ke liye like jin mai bhi find aajae unke liyee chal ajega
+
+
+
+userSchema.pre(/^find/,function(){
+    this.find({age:{$gte:90}}).select('name age -_id')
 })
 
 
 
 
 
+userSchema.post(/^find/,function(doc){
+    console.log(doc);
+    console.log("HELLO");
+})
 
 
-userSchema.post('save',function(doc){
-    console.log(`Your account is create and your password is ${doc.password}`);
+// userSchema.pre('save',function(){
+    // console.log("RUN MY DOCUMENT MIDDLEWARE");
+
+    // this.password=this.name + this.age;
+    // console.log(this);
+    // next();// likho na likho isme chal jaega 
+// })
+
+
+
+
+
+
+
+// userSchema.post('save',function(doc){
+//     console.log(`Your account is create and your password is ${doc.password}`);
 
 
 
@@ -232,7 +264,7 @@ userSchema.post('save',function(doc){
      
 
   
-})
+// })
 
 
 const User=model("User",userSchema);
