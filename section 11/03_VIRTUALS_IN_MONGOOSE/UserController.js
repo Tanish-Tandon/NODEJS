@@ -157,15 +157,75 @@ import User from "./UserModel.js";
 
 
 
-const result=await User.insertMany([
-    {name:"braziliaa",age:96,email:"brazil12@gmail.com"},
+// const result=await User.insertMany([
+//     {name:"braziliaa",age:96,email:"brazil12@gmail.com"},
 
-    {name:"brazilami",age:48,email:"brazil12@gmail.com"}
+//     {name:"brazilami",age:48,email:"brazil12@gmail.com"}
 
-]);
+// ]);
 
 
 
-console.log(result);
+// console.log(result);
+// await mongoose.disconnect();
+
+
+
+
+
+
+
+//automatic index create karta hai like toh agar phele sai duplicate value hai toh toh index nhi banega 
+
+
+
+
+
+// index create when it have some time and also have unique true property
+
+
+
+
+
+// schema level application level database level ka validation
+
+
+
+
+
+
+// try{
+    
+// const user=await User.insertOne({
+//     name:"TANISH TANDON",
+//     age:44,
+//     email:"tandonn123@gmail.com",
+// });
+// }
+// catch(err){
+//     console.log(err);
+
+
+// }
+
+
+// await User.init();
+
+
+
+
+
+// await User.init();
+
 await mongoose.disconnect();
 
+
+// console.log(user);
+
+
+// setTimeout(async ()=>{
+//     await mongoose.disconnect();
+// },1000);
+
+
+// time doge toh banjaega index kam sai kam 500

@@ -22,7 +22,7 @@ const userSchema=new Schema({
         minLength:[5,"Name must be at least 5 characters long"],
         trim:true,
         alias:"nam",
-        
+        index:true,
 
     },
     age:{
@@ -44,7 +44,9 @@ const userSchema=new Schema({
 
      email:{
         type:String,
+   
         required:[true,"Email is required Please provide email"],
+       unique:true,
         match:[/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,"Please provide a valid email address"],
         lowercase:true,
         trim:true,
@@ -293,7 +295,12 @@ userSchema.post("insertMany", function(docs) {
 // })
 
 
+
+
+
 const User=model("User",userSchema);
+
+// await User.init();
 
 
 export default User;

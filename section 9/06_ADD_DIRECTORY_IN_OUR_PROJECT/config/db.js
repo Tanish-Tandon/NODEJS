@@ -42,7 +42,10 @@ export async function  connectDB() {
 
 // yeh ek event hota hai jabh cltrl+c sai apna application cut karte hai
 process.on('SIGINT',async()=>{
-    await client.close();
+    // await client.close();
+
+
+    await mongoose.disconnect();
     console.log("DATABASE DISCONNECTED")
     process.exit(0);
     

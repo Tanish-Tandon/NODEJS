@@ -28,15 +28,16 @@ export const register=async(req,res,next)=>{
    
 
 
-    const foundUser=await User.findOne({email}).lean();
+    // const foundUser=await User.findOne({email}).lean();
 
+    // //findOne -> exists
 
-    if(foundUser){
-       return res.status(409).json({
-            error : "User already exists",
-            message:"A user with this email address already exist.please try to login with different email"
-         })
-    }
+    // if(foundUser){
+    //    return res.status(409).json({
+    //         error : "User already exists",
+    //         message:"A user with this email address already exist.please try to login with different email"
+    //      })
+    // }
 
     
 
@@ -188,7 +189,22 @@ await Directory.insertOne({
   
         if(err.code===121){
             res.status(400).json({error:"Invalid fields,please enter valid details"});
-        }else{
+        }
+        else if(err.code === 11000){
+            if(err.keyValue.email){
+                return res.status(409).json({
+                error:"EMAIL ALREADY EXISTS",
+                message:"A user with this email address already exist.please try to login with different email"
+
+            })
+            
+
+  
+            // console.log(err);
+        }
+    }
+        
+        else{
 
             next(err);
 
