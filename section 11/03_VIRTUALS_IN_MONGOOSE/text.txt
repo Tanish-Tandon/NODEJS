@@ -30,3 +30,57 @@ console.log(user.fullName);
 
 
 Tanish Tandon
+
+
+
+
+
+
+
+Document middleware runs on a single document instance, not on queries.
+
+👉 It triggers when you call methods like:
+
+doc.save()
+doc.validate()
+doc.remove() (deprecated → use deleteOne)
+
+
+
+
+
+
+
+
+
+
+
+👉 Query middleware runs when you execute queries on the model, not on a single document.
+
+User.find()
+User.findOne()
+User.updateOne()
+User.deleteOne()
+
+
+
+
+
+
+
+
+👉 Model middleware runs on Model-level methods (not document, not query).
+User.insertMany()
+User.createCollection()
+
+
+Method	Use
+insertMany()	bulk insert
+createCollection()	create DB collection
+bulkWrite()	multiple operations
+
+
+Type	Runs On	this
+Document	doc.save()	document
+Query	Model.find()	query
+Model	Model.insertMany()	model

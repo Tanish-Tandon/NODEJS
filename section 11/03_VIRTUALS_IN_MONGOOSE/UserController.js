@@ -138,18 +138,34 @@ import User from "./UserModel.js";
 
 // const user=await User.find({name:"brazil"});
 
+// use of await is mandatory
+// const user=await User.findOne({name:"brazil"});
 
-const user=await User.findOne({name:"brazil"});
-
-const user1=await User.find({name:"brazil"});
+// const user1=await User.find({name:"brazil"});
 
 // console.log(user);
+
 // console.log(user1);
+
+
+
 
 // const user=User.find({name:"TANISH THE KING OF ALL TIME"}); isme find find karke logic badha skte hai aur
 
 // await user.save();
 
 
+
+
+const result=await User.insertMany([
+    {name:"braziliaa",age:96,email:"brazil12@gmail.com"},
+
+    {name:"brazilami",age:48,email:"brazil12@gmail.com"}
+
+]);
+
+
+
+console.log(result);
 await mongoose.disconnect();
 

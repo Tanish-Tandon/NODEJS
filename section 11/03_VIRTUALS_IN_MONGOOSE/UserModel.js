@@ -206,6 +206,10 @@ const userSchema=new Schema({
 
 
 
+// userSchema.pre("find",function(){
+//     this.find({age:{$gte:90}}).select('name age -_id')
+// })
+
 
 // userSchema.pre(["find","findOne"],function(){
 //     this.find({age:{$gte:90}}).select('name age -_id')
@@ -221,18 +225,40 @@ const userSchema=new Schema({
 
 
 
-userSchema.pre(/^find/,function(){
-    this.find({age:{$gte:90}}).select('name age -_id')
+userSchema.pre('insertMany',function(docs,next){
+    // console.log(docs);
+    //   console.log(docs);
+    for(const doc of docs){
+
+        doc.password = doc.name + doc.age;
+    }
+   console.log("RUNNING INSERT MANY MIDDLEWARE ");
+//    next();
 })
 
 
 
 
 
-userSchema.post(/^find/,function(doc){
-    console.log(doc);
-    console.log("HELLO");
-})
+
+userSchema.post("insertMany", function(docs) {
+    console.log("Inserted docs:", docs);
+});
+
+
+// model middle ware
+// userSchema.pre('insertMany',function(doc){
+//     this.find({age:{$gte:90}}).select('name age -_id')
+// })
+
+
+
+
+
+// userSchema.post(/^find/,function(doc){
+//     console.log(doc);
+//     console.log("HELLO");
+// })
 
 
 // userSchema.pre('save',function(){
