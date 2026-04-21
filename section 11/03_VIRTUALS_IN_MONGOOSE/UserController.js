@@ -104,9 +104,17 @@ import User from "./UserModel.js";
 // console.log(user.getSummary('full'));
 
 
-const user=await User.find({email:"tandon123@gmail.com"})
+// const user=await User.find({email:"tandon123@gmail.com"})
 
-console.log(user);
+// console.log(user);
+
+
+
+
+
+
+//init save validate remove in document middleware
+
 
 
 
@@ -114,6 +122,21 @@ console.log(user);
 
 
 // console.log(user.toJSON({virtuals:true}));// jo extra hoghi vo bhi dikhjaegi virtual true kardo toh
+
+
+
+
+
+
+const user=new User({
+    name:'brazil',
+    age:48,
+    email:"brazil12@gmail.com",
+    
+});
+
+
+await user.save();
 
 
 await mongoose.disconnect();

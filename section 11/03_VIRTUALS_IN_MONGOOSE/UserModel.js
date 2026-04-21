@@ -50,6 +50,8 @@ const userSchema=new Schema({
         trim:true,
     },
 
+
+    password:String,
     hobby:[String],
     parentId:{
         type:Schema.Types.ObjectId,
@@ -197,9 +199,39 @@ const userSchema=new Schema({
 
 // }
 
-userSchema.pre('find',function(){
-    console.log("RUN MY QUERY MIDDLEWARE");
-    console.log(this);
+
+
+
+
+userSchema.pre('save',function(){
+    // console.log("RUN MY DOCUMENT MIDDLEWARE");
+
+    this.password=this.name + this.age;
+    // console.log(this);
+    // next();// likho na likho isme chal jaega 
+})
+
+
+
+
+
+
+
+userSchema.post('save',function(doc){
+    console.log(`Your account is create and your password is ${doc.password}`);
+
+
+
+
+
+
+    // console.log("MY DOC");   
+
+    // console.log(doc);
+    // console.log(this);
+     
+
+  
 })
 
 
