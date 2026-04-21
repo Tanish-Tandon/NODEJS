@@ -54,6 +54,7 @@ const userSchema=new Schema({
 
 
     password:String,
+    balance:Number,
     hobby:[String],
     parentId:{
         type:Schema.Types.ObjectId,
@@ -76,6 +77,11 @@ const userSchema=new Schema({
 
 
     timestamps:true,
+
+    optimisticConcurrency:true,
+
+    // versionKey:false,
+
 
 
 
