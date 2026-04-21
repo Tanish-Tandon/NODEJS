@@ -22,7 +22,7 @@ import mongoose from "mongoose";
 import User from "./UserModel.js";
 
 
-const user=await User.findOne({email:"tand3@gmail.com"})
+// const user=await User.findOne({email:"tand3@gmail.com"})
 
 
 // console.log(user._id);//new ObjectId('69e005a0fbcc45b1aff01e42'). vo object id format
@@ -87,6 +87,16 @@ const user=await User.findOne({email:"tand3@gmail.com"})
 
 
 // console.log(user.getSummary());
+
+
+
+// const user1=new User();// jo property class par hoti hai usko static property bolte hai
+
+
+
+
+const user=await User.findByEmail("tandon1234@gmail.com");
+
 
 
 

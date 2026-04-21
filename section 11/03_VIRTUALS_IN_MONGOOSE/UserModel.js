@@ -132,6 +132,25 @@ const userSchema=new Schema({
         return `${this.name} is ${this.age} years old.`;
 
     }
+    },
+
+
+
+    statics:{
+
+         findByName(name){
+        return this.find({name});
+        },
+
+        findOneByName(name){
+        return this.findOne({name});
+        },
+
+          findByEmail(email){
+        return this.findOne({email});
+
+        }
+
     }
 
 
@@ -166,6 +185,11 @@ const userSchema=new Schema({
 userSchema.virtual('emailDomain').get(function(){
    return this.email.split('@')[1]
 })
+
+//syntax
+// userSchema.statics.xyz=function(){
+
+// }
 
 
 
