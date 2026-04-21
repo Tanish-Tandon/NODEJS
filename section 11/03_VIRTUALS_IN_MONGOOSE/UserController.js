@@ -95,15 +95,18 @@ import User from "./UserModel.js";
 
 
 
-const user=await User.findByEmail("tandon1234@gmail.com");
+// const user=await User.findByEmail("tandon1234@gmail.com");
 
 
 
 
 
-console.log(user.getSummary('full'));
+// console.log(user.getSummary('full'));
 
 
+const user=await User.find({email:"tandon123@gmail.com"})
+
+console.log(user);
 
 
 

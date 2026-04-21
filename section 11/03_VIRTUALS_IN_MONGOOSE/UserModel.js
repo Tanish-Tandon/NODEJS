@@ -182,9 +182,9 @@ const userSchema=new Schema({
 
 
 
-userSchema.virtual('emailDomain').get(function(){
-   return this.email.split('@')[1]
-})
+// userSchema.virtual('emailDomain').get(function(){
+//    return this.email.split('@')[1]
+// })
 
 //syntax
 // userSchema.statics.xyz=function(){
@@ -196,6 +196,11 @@ userSchema.virtual('emailDomain').get(function(){
 // userSchema.methods.abc=function(){
 
 // }
+
+userSchema.pre('find',function(){
+    console.log("RUN MY QUERY MIDDLEWARE");
+    console.log(this);
+})
 
 
 const User=model("User",userSchema);
