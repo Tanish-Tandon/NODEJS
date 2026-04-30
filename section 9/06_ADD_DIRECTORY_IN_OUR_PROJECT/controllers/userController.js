@@ -269,9 +269,19 @@ export const login=async(req,res,next)=>{
   httpOnly: true,
   sameSite: "lax",
     secure: false,
-  maxAge: 1000 * 60 * 60 * 24 * 7
+  maxAge: 10*1000,
 
-});
+  //maxAge:60*1000*60*24*7
+
+
+
+
+ 
+
+ 
+
+}); 
+
 
 
 

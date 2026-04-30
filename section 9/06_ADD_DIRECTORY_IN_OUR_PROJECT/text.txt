@@ -836,3 +836,10 @@ Here are the key reasons to use lean() in Mongoose:
 Performance Optimization: Returning plain JavaScript objects instead of full Mongoose document objects reduces the overhead. This can lead to faster queries and reduced memory usage, especially in read-heavy applications.
 No Extra Mongoose Functionality: If you don't need Mongoose document features like instance methods, virtuals, or hooks, using .lean() is beneficial as it provides a cleaner, faster result.
 Simple Data Structure: Sometimes, working with plain objects is all you need, especially when you're not updating or modifying the data.
+
+
+
+
+
+ 
+ 
