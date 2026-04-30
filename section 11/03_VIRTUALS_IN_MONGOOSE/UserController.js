@@ -70,6 +70,8 @@ import User from "./UserModel.js";
 
 
 
+console.log()
+
 
 // user.hobbiesString="TT,Football";
 
@@ -77,6 +79,9 @@ import User from "./UserModel.js";
 // console.log(user.emailDomain);
 
 
+
+
+//console.log(user.email.Domain)
 
 
 
@@ -106,7 +111,8 @@ import User from "./UserModel.js";
 
 // const user=await User.find({email:"tandon123@gmail.com"})
 
-// console.log(user);
+// console
+// .log(user);
 
 
 

@@ -808,6 +808,7 @@ User.find({ age: { $gt: 18 } })
 
 
 
+
 1. What is ref?
 
 ref is used inside a schema to tell Mongoose:
