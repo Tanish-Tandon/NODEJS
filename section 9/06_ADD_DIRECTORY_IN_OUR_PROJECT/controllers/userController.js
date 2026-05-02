@@ -263,15 +263,24 @@ export const login=async(req,res,next)=>{
     }
 
 
+    const cookiePayload={
+          id:user._id.toString(),
+       expiry:Math.round(Date.now()/1000+10),
+
+    }
 
 
-  res.cookie("uid", user._id.toString() , {
+  res.cookie("uid", Buffer.from(JSON.stringify(cookiePayload)).toString("base64url"),  {
   httpOnly: true,
   sameSite: "lax",
     secure: false,
-  maxAge: 10*1000,
+//   maxAge: 10*1000,
 
-  //maxAge:60*1000*60*24*7
+
+  maxAge:60*1000*60*24*7
+
+
+
 
 
 
