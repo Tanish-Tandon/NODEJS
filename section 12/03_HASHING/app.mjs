@@ -6,16 +6,67 @@
 // console.log(hashHex);
 
 
-const encodeText=new TextEncoder().encode("TANISH TANDON");
+// const encodeText=new TextEncoder().encode("TANISH TANDON");
 
-const hashBuffer=await crypto.subtle.digest("SHA-256",encodeText);
+// const hashBuffer=await crypto.subtle.digest("SHA-256",encodeText);
 
-const hashArray=[...new Uint8Array(hashBuffer)];
+// const hashArray=[...new Uint8Array(hashBuffer)];
 
-const hashHex=hashArray.map(byte => byte.toString(16).padStart(2,"0")).join("");
+// const hashHex=hashArray.map(byte => byte.toString(16).padStart(2,"0")).join("");
 
-console.log(hashHex); 
+// console.log(hashHex); 
 
 
 
+
+
+
+
+
+
+// import crypto from 'crypto';
+
+// const hash=crypto.createHash('sha256').update("TANISH TANDON").digest("hex");
+
+// console.log(hash);
+
+
+//echo -n "Hello World" | openssl dgst -sha256
+
+
+
+
+
+
+// import crypto from 'crypto';
+
+// const hash=crypto.createHash('sha256').update(Buffer.from("TANISH TANDON\n\r")).digest("hex");
+
+// console.log(hash);
+
+
+
+
+// const hash=crypto
+//  .createHash('sha256')
+//  .update("Hello ")
+//  .update("World")
+//  .digest("hex");
+
+
+ 
+
+
+
+import crypto from 'crypto';
+import { readFileSync } from 'fs';
+import { readFile } from 'fs/promises';
+
+
+
+const filedata=readFileSync("/Users/tanishtandon/Downloads/video.mp4");
+
+const hash=crypto.createHash('sha256').update(filedata).digest("hex");
+
+console.log(hash);
 
