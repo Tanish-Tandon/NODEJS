@@ -38,7 +38,7 @@
 
 
 
-// import crypto from 'crypto';
+import crypto from 'crypto';
 
 // const hash=crypto.createHash('sha256').update(Buffer.from("TANISH TANDON\n\r")).digest("hex");
 
@@ -51,22 +51,27 @@
 //  .createHash('sha256')
 //  .update("Hello ")
 //  .update("World")
-//  .digest("hex");
+//  .digest("base64");
 
-
+// console.log(hash);
  
 
 
 
-import crypto from 'crypto';
-import { readFileSync } from 'fs';
-import { readFile } from 'fs/promises';
+// import crypto from 'crypto';
+// import { readFileSync } from 'fs';
+// import { readFile } from 'fs/promises';
 
 
 
-const filedata=readFileSync("/Users/tanishtandon/Downloads/video.mp4");
+// const filedata=readFileSync("/Users/tanishtandon/Downloads/video.mp4");
 
-const hash=crypto.createHash('sha256').update(filedata).digest("hex");
+// const hash=crypto.createHash('sha256').update(filedata).digest("hex");
 
-console.log(hash);
+// console.log(hash);
 
+
+
+
+
+console.log(Buffer.from("pZGm1Av0IEBKARczz7exkNYsZb8LzaMrV7J32a2fFG4=","base64").toString("hex"));  
